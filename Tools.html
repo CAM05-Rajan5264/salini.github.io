@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head> <!-- HEADER -->
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/mainstyle.css" />
+        <title>Joseph Salini Web page: Tools for thesis</title>
+        
+            </head>
+
+
+    <body> <!-- BODY -->
+ 
+        
+        <header>
+            <span id="HOME_logo"><a href="index.html"><img src="img/home.png" alt="home" height="40px"/></a></span>
+            <h1>Joseph Salini - Tools</h1>
+        </header>
+
+        <bodier>
+            
+        <nav>
+        	<table >
+	            <tr><td> <h2> <a href="Resume.html">Resume</a> </h2> </td> </tr>
+	            <tr><td> <h2> <a href="Thesis.html">Thesis</a> </h2> </td> </tr>
+	            <tr><td> <h2> <a href="Arboris.html">Arboris</a> </h2> </td> </tr>
+	            <tr><td> <h2> <a href="XDE.html">XDE</a> </h2> </td></tr>
+	            <tr><td> <h2> <a href="Tools.html">Tools for thesis</a> </h2> </td></tr>
+	            <tr><td> <h2> <a href="Projects.html">Projects</a> </h2> </td></tr>
+	            <tr><td> <h2> <a href="webPlayer.html">webPlayer</a> </h2>  </td></tr>
+	            <tr><td> <br>  </td></tr>
+	            <tr><td> <br>  </td></tr>
+	            <tr><td> <h2> <a href="Contact.html">Contact</a> </h2>  </td></tr>
+	     	</table>
+        </nav>
+                    
+            
+			<table style="width:100%; height:100%;">
+        		<tr>
+        			<td class="dummy_nav_space">
+            
+            		</td>
+
+					<td  class="section">
+		            	The main software used during my thesis are available on ubuntu:
+            	<ul>
+            		<li>imagemagick: to edit and transform images,</li>
+            		<li>ffmpeg: to create and convert videos,</li>
+            		<li>gimp: for more complicated image edition, </li>
+            		<li>inkscape: for vectorized image edition, </li>
+					<li>matplotlib: to plot results with python. </li>
+            	</ul>
+            	<br>
+            	<div class="section_block">
+            		<h3>Create an outline around an image:</h3>
+            		The idea comes from <a href="http://people.isir.upmc.fr/ibanez" target="_blank">Aurelien Ibanez</a>, and is:
+            		first, to crop the image borders (to draw outlines on the borders),
+            		and second to add the black outline.
+            		
+		<div class="code_block">
+			<pre>
+				
+<code>#!/bin/bash
+
+# To use it, run the command:
+#    bash  create_outline.sh  input_img.png  output_img.png
+
+WIDTH=`identify -format "%[fx:w]" "$1"`
+HEIGHT=`identify -format "%[fx:h]" "$1"`
+convert $1 -crop $((WIDTH-4))x$((HEIGHT-4))+2+2 $2
+convert $2 -bordercolor \#00000000 -border 2  -alpha on  $2
+convert $2 \( +clone -channel A -morphology EdgeOut Diamond:2 +channel +level-colors black \) -compose DstOver -composite $2
+</code>
+			</pre>
+		</div>
+		
+		<div style="text-align:right;">
+			<a href="misc/create_outline.sh">[source code]</a>
+		</div>
+		            		<div style="text-align:center">
+            			<img src="img/tools/outline_in.png"  width="40%" alt="outline in" >
+            			<img src="img/tools/outline_out.png" width="40%" alt="outline out" >
+            		</div>
+            	</div>
+            
+            		</td>
+            	</tr>
+        	</table>
+		        </bodier>
+
+
+        
+			<footer>
+				<p id="footer_description">
+				<span class="date">24 Feb 2017</span> <strong>Joseph Salini</strong>
+				</p>
+			</footer>
+		
+    </body>
+
+</html>

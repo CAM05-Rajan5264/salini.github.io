@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>pydaenim : collada viewer</title>
+		
+		
+		<link href="pydaenim_resources/css/smoothness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" />   
+		<link href="pydaenim_resources/css/evol.colorpicker.css" rel="stylesheet" />  
+		<style>
+			 .ui-dialog  { font-size: 0.75em; }
+			 .dialog_entry {text-align: right; }
+		</style>
+		
+		<!-- - - - - - - - - - - - - - - - - - - - - - -
+		// jQuery UI script, for interface
+		- - - - - - - - - - - - - - - - - - - - - - - -->
+		<script src="pydaenim_resources/jquery/jquery-1.9.1.js"></script>
+		<script src="pydaenim_resources/jquery/jquery-ui-1.10.2.custom.min.js"></script>
+		
+		<script src="pydaenim_resources/jquery/evol.colorpicker.min.js"></script>
+		
+		
+		<!-- - - - - - - - - - - - - - - - - - - - - - -
+		// THREE, for 3D engine
+		- - - - - - - - - - - - - - - - - - - - - - - -->
+		<script src="pydaenim_resources/three/three.min.js"></script>
+		<script src="pydaenim_resources/three/extra/loaders/ColladaLoader.js"></script>
+		<script src="pydaenim_resources/three/extra/controls/TrackballControls.js"></script>
+		<script src="pydaenim_resources/three/extra/Detector.js"></script>
+		<script src="pydaenim_resources/three/extra/libs/stats.min.js"></script>
+		<script src="pydaenim_resources/three/fonts/helvetiker_regular.typeface.js"></script>	
+	</head>
+
+    
+
+	<body> <!-- BODY -->
+    <div id="three_player" style="position:absolute; top:1px; bottom:5px;  left:0px; right:0px; border:1px black solid;">
+        <div id="three_inside" style="position:absolute; top:0px; bottom:0px; width:100%; ">
+            three.js display
+        </div>
+    </div>
+    
+    <div id="three_player_container" style="position:absolute;  left:0px; right:0px; bottom:1px;">
+        <div id="animation_control" class="ui-widget-header ui-corner-bottom" style="margin-top:0px;">
+                
+            <table width="100%">
+                <tr>
+                    <td colspan="3"><div id="animationSlider" style="font-size:0.6em; margin-left:3px; margin-right:5px;"></div></td>
+                </tr>
+                <tr>
+                    <td style="text-align:left; width:20%;">
+                        <div id="speedSelectionBlock" style="font-size: 0.75em;"> speed x
+                        <select name="speedSelection" id="speedSelection" style="text-align:center;">
+                            <option value=".1">.1</option>
+                            <option value=".2">.2</option>
+                            <option value=".5">.5</option>
+                            <option value="1." selected>1.</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2.">2.</option>
+                            <option value="5.">5.</option>
+                        </select>
+                        </div>
+                    </td>
+                    <td style="text-align:center; width:60%;">
+                        <div>
+                            <button id="slower">slower</button>
+                            <button id="faster">faster</button>
+                            <div style="width:20px; display:inline-block;"></div>
+                            <button id="playpause">play</button>
+                            <button id="stop">stop</button>
+                            <div style="width:20px; display:inline-block;"></div>
+                            <button id="record">record</button>
+                            <button id="snapshot">snapshot</button>
+                        </div>
+                    </td>
+                    <td style="text-align:right; width:20%;">
+                        <div id="animationTimeInfo" style="position:relative; right:0px; font-size: 0.75em;">
+                            0s (0)
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+        
+		
+		<!-- - - - - - - - - - - - - - - - - - - - - - -
+		// INIT ALL VARIABLES
+		- - - - - - - - - - - - - - - - - - - - - - - -->
+		<script>
+			var three_inside = document.getElementById( "three_inside" );
+			var three_player = document.getElementById( "three_player" );
+			var div_info     = "";
+			
+			var input_collada_file = 'anim.dae';
+			
+			// for the creation of the webSocket; if null, no socket created, else it will instanciate a socket for communicationwith this url
+			var webDaenimSocket = null;
+			
+			// for three.js
+			var model;
+			var camera;
+			var scene;
+			var renderer;
+			var controls;
+			
+			var stats;
+			var grid;
+			
+			// physics informations
+			var physics_models = [];
+			
+			// animation information
+			var animations = [];
+			var colladaIsAnimated = false;
+			var isPlaying=false;
+			var isRecording = false;
+
+			var animationSpeed = 1.;
+			var animationSpeedOptionLength = 0;
+
+			var timeline = [];
+			var kfAnimations = [];
+			var kfAnimationsLength = 0;
+			var lastTimestamp;
+			var progress = 0;
+			var currentIndex=0;
+			var animationTimeInfo = document.getElementById( "animationTimeInfo" );
+
+			var allModelNodes        = {};
+			var animationMovableNode = [];
+			var animationNodeData    = [];
+			
+			// display options
+			var frame_arrows_scale   = .1;
+			var grid_scale           = 1.;
+			var text_mesh_scale      = .05;
+			var inertia_scale_factor = 10.;
+			
+			var camera_position_vector = [];
+			var camera_target_vector   = [];
+			var camera_up_vector       = [];
+			var grid_up_vector         = [];
+
+			var currentBGColor   = 0;
+			var currentBGOpacity = 0;
+
+			var frame_arrows_geometry = null;
+			var frame_arrows_material = null;
+			var inertia_geometry      = null;
+
+			var list_of_frame_arrows  = null;
+			var list_of_texts         = null;
+			var list_of_shapes        = null;
+			var list_of_inertias      = null;
+
+			
+			
+			$( "#accordion_three_info").hide();
+			$( "#accordion_three_control").hide();
+			$( "#dialog_camera" ).hide();
+			$( "#dialog_display_options" ).hide();
+			$( "#animation_control").hide();
+		</script>
+
+		
+		<!-- INSERT USER PARAMETERS HERE -->
+		
+		
+		<!-- - - - - - - - - - - - - - - - - - - - - - -
+		// START RENDERER
+		- - - - - - - - - - - - - - - - - - - - - - - -->
+		<script src="pydaenim_resources/pydaenim_three_info.js"> </script>
+		<script src="pydaenim_resources/pydaenim_three_control.js"> </script>
+		<script src="pydaenim_resources/pydaenim_animation_control.js"> </script>
+		<script src="pydaenim_resources/pydaenim_websocket.js"> </script>
+		<script src="pydaenim_resources/pydaenim_three_display.js"> </script>
+		
+
+	</body>
+
+</html>
+

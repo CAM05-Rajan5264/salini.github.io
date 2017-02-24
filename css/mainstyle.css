@@ -1,0 +1,290 @@
+
+/*-----------------------------------------------------------------------------
+General
+-----------------------------------------------------------------------------*/
+body
+{
+    height: 100%;
+    width: 100%;
+    
+    border: 0px black solid;
+}
+
+/* for lists */
+ul, ol { margin-left:1.5em; padding-left:0px; }
+li { margin-bottom:1em; }
+
+
+/* for frames */
+frame
+{
+	border: 1px red solid;
+}
+
+
+pre
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+
+.code_block
+{
+	border: 1px #000000 solid;
+	background: #dddddd;
+	margin-top: 10px;
+}
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------
+Définition du header: le titre
+-----------------------------------------------------------------------------*/
+header
+{
+    border: inherit;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 60px;
+    width: 100%;
+
+    background: black;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#b9c7cf', GradientType=0 );
+    background: -moz-linear-gradient(center top, black, rgb(185,199,207));
+    background: -webkit-gradient(linear, center top, center bottom, from(black), to(rgb(185,199,207)));
+    background: -o-linear-gradient(top, black, rgb(185,199,207));
+    
+
+
+    color: rgb(217,221,231);
+    /*z-index: 20;*/
+}
+
+h1
+{
+    text-align: center;
+    margin: 10px;
+}
+
+#HOME_logo
+{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+
+
+#PROF_space
+{
+	position: fixed;
+	top: 10px;
+	right: 10px;
+}
+
+#prof_page
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-size: large;
+}
+
+#ISIR_logo
+{
+	display: inline-block;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------
+Définition du "bodier": entre le header et le footer
+
+C'est là où on va tout mettre, la barre de navigation au dessus
+et l'affichage des pages juste en dessous
+-----------------------------------------------------------------------------*/
+bodier
+{
+    border: inherit;
+    position: fixed;
+    left: 0px;
+    top: 60px;
+    bottom: 25px;
+    width: 100%;
+    overflow: auto;
+    
+    background: rgb(215, 223, 227);
+    
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b9c7cf', endColorstr='#f5f7f8', GradientType=0 );
+    background: -moz-linear-gradient(center top, rgb(185,199,207), rgb(245,247,248));
+    background: -webkit-gradient(linear, center top, center bottom, from(rgb(185,199,207)), to(rgb(245,247,248)));
+    background: -o-linear-gradient(top, rgb(185,199,207), rgb(245,247,248));
+    
+    color: rgb(38,34,24);
+    
+    /*z-index: 5;*/ 
+}
+
+h2
+{
+	margin: 0px;
+    font-size: 1.5em;
+}
+
+h2 a
+{
+	color: black;
+	text-decoration: none;
+}
+
+
+nav, navigation
+{
+	position: fixed;
+	top: 15%;
+	bottom: 25%;
+	left:0px;
+	
+	width: 20%;
+	min-width: 220px;
+	
+    text-align: center;
+    
+    z-index: 5;
+}
+
+nav table
+{
+	width: 100%;
+	min-width: 220px;	
+	height: 100%;
+	
+	border-collapse: collapse;
+
+	margin:0px;
+	padding: 0px;
+}
+
+
+.dummy_nav_space
+{
+	width:20%;
+	min-width:220px;
+	
+	z-index: 4;
+}
+
+
+
+.section
+{
+	width: 80%;
+    border-left: 2px solid rgb(185,199,207);
+    border-radius: 0px 0px 0px 50px;
+    padding: 60px;
+    
+    overflow: auto;
+}
+
+.section_block
+{
+	border: 2px solid rgb(185,199,207);
+	border-bottom: 0px;
+    border-radius: 30px 30px 30px 30px;
+    padding: 30px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+.section_block h3
+{
+	padding-left: 10px;
+	margin-top: -10px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid rgb(185,199,207);
+	
+}
+
+.work_in_progress
+{
+	font-size: 2em;
+	color: black;
+	padding: 2px;
+}
+
+.background_icub
+{
+	position: fixed;
+	top: 60px;
+	bottom:  25px;
+	right: 0px;
+	left: 0px;
+	text-align: right;
+	
+	z-index: 2;
+}
+
+
+#webdaenim_iframe
+{
+	width:800px;
+	height: 600px;
+	sandbox: allow-forms allow-same-origin allow-scripts allow-top-navigation;
+}
+
+
+
+/*-----------------------------------------------------------------------------
+Définition du footer
+
+On y met la date de dernière mise à jour, le nom et l'éditeur
+voire peut-être d'autres info utiles.
+-----------------------------------------------------------------------------*/
+footer
+{
+    border: inherit;
+    position:fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 25px;
+    width: 100%;
+    font-size: small;
+    
+    background: black;
+    
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f7f8', endColorstr='#000000', GradientType=0 );
+    background: -moz-linear-gradient(center top, rgb(245,247,248), black);
+    background: -webkit-gradient(linear, center top, center bottom, from(rgb(245,247,248)), to(black));
+    background: -o-linear-gradient(top, rgb(245,247,248), black);
+    
+    
+    color: rgb(217,221,231);
+    /*z-index: 10;*/
+}
+
+footer p#footer_description {
+    margin: 5px;
+    text-align: center;
+}
+
+footer span.date {
+    float: left;
+}
+
+footer span.editor {
+    float:  right;
+} 
+
