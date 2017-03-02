@@ -1,78 +1,56 @@
 <!DOCTYPE html>
 <html>
 
-<head> <!-- HEADER -->
+    <head> <!-- HEADER -->
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/mainstyle.css" />
-
         <title>Joseph Salini Web page: Sandbox</title>
-        
-            </head>
+    </head>
 
 
     <body> <!-- BODY -->
- 
-        
-        <header>
-            <span id="HOME_logo"><a href="index.html"><img src="img/home.png" alt="home" height="40px"/></a></span>
-            <h1>Joseph Salini - Sandbox</h1>
-        </header>
+        <header id="headerContent"></header>
 
         <bodier>
-            
-        <nav>
-        	<table >
-	            <tr><td> <h2> <a href="Resume.html">Resume</a> </h2> </td> </tr>
-	            <tr><td> <h2> <a href="Thesis.html">Thesis</a> </h2> </td> </tr>
-	            <tr><td> <h2> <a href="Arboris.html">Arboris</a> </h2> </td> </tr>
-	            <tr><td> <h2> <a href="XDE.html">XDE</a> </h2> </td></tr>
-	            <tr><td> <h2> <a href="Tools.html">Tools for thesis</a> </h2> </td></tr>
-	            <tr><td> <h2> <a href="Projects.html">Projects</a> </h2> </td></tr>
-	            <tr><td> <h2> <a href="webPlayer.html">webPlayer</a> </h2>  </td></tr>
-	            <tr><td> <br>  </td></tr>
-	            <tr><td> <br>  </td></tr>
-	            <tr><td> <h2> <a href="Contact.html">Contact</a> </h2>  </td></tr>
-	     	</table>
-        </nav>
-                    
-            
-			<table style="width:100%; height:100%;">
-        		<tr>
-        			<td class="dummy_nav_space">
-            
-            		</td>
+            <nav id="navigationContent"></nav>
 
-					<td  class="section">
-		            	<div class="section_block">
-            	<h3> Collada viewer:</h3>
-            		Here is a prototype to display collada files with only javascript libraries. <br>
-            		In the future, this player may become the arboris viewer: it should ease visualization (no compilation, cross-platform, etc.).
-            		<ul>
-            			<li>The 3D graphic library is <a href="http://threejs.org/" target="_blank">three.js</a></li>
-            			<li>The user interface is developed with <a href="http://jqueryui.com/" target="_blank">jQuery UI</a></li>
-            		</ul>
-					
-					<div style="margin:auto; text-align:center;">
-						<iframe id="webdaenim_iframe" src="webPlayer/pydaenim.html"></iframe>
-					</div> 
-					
+            <table style="width:100%; height:100%;">
+                <tr>
+                    <td class="dummy_nav_space">
+            
+                    </td>
+
+                    <td  class="section">
+                        <div class="section_block">
+                <h3> Collada viewer:</h3>
+                    Here is a prototype to display collada files with only javascript libraries. <br>
+                    In the future, this player may become the arboris viewer: it should ease visualization (no compilation, cross-platform, etc.).
+                    <ul>
+                        <li>The 3D graphic library is <a href="http://threejs.org/" target="_blank">three.js</a></li>
+                        <li>The user interface is developed with <a href="http://jqueryui.com/" target="_blank">jQuery UI</a></li>
+                    </ul>
+                    
+                    <div style="margin:auto; text-align:center;">
+                        <iframe id="webdaenim_iframe" src="webPlayer/pydaenim.html"></iframe>
+                    </div> 
+                    
                 </div>
 
             
-            		</td>
-            	</tr>
-        	</table>
-		            
+                    </td>
+                </tr>
+            </table>
         </bodier>
 
-
-        
-			<footer>
-				<p id="footer_description">
-				<span class="date">24 Feb 2017</span> <strong>Joseph Salini</strong>
-				</p>
-			</footer>
-		
+        <footer id="footerContent"></footer>
     </body>
 
+    <!-- SCRIPTS -->
+    <script src="Template.js" type="text/javascript"></script>
+    <script>
+        document.getElementById("headerContent").innerHTML     = Template.getHeader('SandBox');
+        document.getElementById("navigationContent").innerHTML = Template.getNavigation();
+        document.getElementById("footerContent").innerHTML     = Template.getFooter();
+    </script>
+    
 </html>
