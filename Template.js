@@ -19,11 +19,11 @@ class Template {
         str += '<table >'
         str += this.getNavElement('Resume.html', 'Resume');
         str += this.getNavElement('Thesis.html', 'Thesis');
-        str += this.getNavElement('Arboris.html', 'Arboris');
-        str += this.getNavElement('XDE.html', 'XDE');
-        str += this.getNavElement('Tools.html', 'Tools for thesis');
-        str += this.getNavElement('Projects.html', 'Projects');
+        str += this.getNavElement('Projects.html', 'Projects/Interviews');
         str += this.getNavElement('webPlayer.html', 'webPlayer');
+        str += this.getNavElement('XDE.html', 'XDE');
+        str += this.getNavElement('Arboris.html', 'Arboris');
+        str += this.getNavElement('Tools.html', 'Tools for thesis');
         str += this.getNavNoElement();
         str += this.getNavNoElement();
         str += this.getNavElement('Contact.html', 'Contact');
