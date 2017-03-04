@@ -240,8 +240,8 @@ nav table
 
 #webdaenim_iframe
 {
-	width:800px;
-	height: 600px;
+	width:100%;
+	/* padding-top: 50%; */
 	sandbox: allow-forms allow-same-origin allow-scripts allow-top-navigation;
 }
 

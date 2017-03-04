@@ -1,4 +1,36 @@
 
+
+// for three.js
+var model;
+var camera;
+var scene;
+var renderer;
+var controls;
+
+
+// display options
+var frame_arrows_scale   = .1;
+var grid_scale           = 1.;
+var text_mesh_scale      = .05;
+var inertia_scale_factor = 10.;
+
+var camera_position_vector = [];
+var camera_target_vector   = [];
+var camera_up_vector       = [];
+var grid_up_vector         = [];
+
+
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+    var container = document.getElementById( "three_inside" );
+	camera.aspect = container.clientWidth / container.clientHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( container.clientWidth, container.clientHeight );
+}
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // JQUERY UI HEADERS
@@ -26,6 +58,7 @@ $(function() {
 
 
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // JQUERY UI EVENTS FUNCTIONS FOR ANIMATION CONTROL
@@ -49,9 +82,9 @@ function player_slider_change (event, ui) {
 
 
 function saveRecordSnapShot() {
-	image 	= new Image();
+	var image 	= new Image();
 	image.src = renderer.domElement.toDataURL("image/png;base64");
-	webDaenimSocket.send( JSON.stringify(['rec_img', currentIndex, image.src]) );
+	//webDaenimSocket.send( JSON.stringify(['rec_img', currentIndex, image.src]) );
 }
 
 
@@ -101,7 +134,7 @@ function set_animation_control_state (isAnimated) {
 function set_camera_up_from_collada (collada) {
 	if (camera_up_vector.length != 3)
 	{
-		mlookAt = new THREE.Matrix4();
+		var mlookAt = new THREE.Matrix4();
 		if (collada.colladaUp == 'X')
 		{
 			camera.up.set(1,0,0);
@@ -270,7 +303,7 @@ function create_grid()
 
 function create_light()
 {
-	pointLight = new THREE.PointLight( 0xffffff, 1.75 );
+	var pointLight = new THREE.PointLight( 0xffffff, 1.75 );
 	pointLight.position = camera.position;
 	pointLight.rotation = camera.rotation;
 	pointLight.scale = camera.scale;
@@ -282,11 +315,11 @@ function animation_goto_keyframe( idx )
 {
 	for ( var i = 0; i < kfAnimationsLength; ++i )
 	{
-		node = animationMovableNode[i];
-		m	= animationNodeData[i][idx];
+		var node = animationMovableNode[i];
+		var m    = animationNodeData[i][idx];
 		
 		node.quaternion.setFromRotationMatrix(m);
-		node.position = m.getPosition();
+		node.position.getPositionFromMatrix( m );
 		node.updateMatrix();
 	}
 }
@@ -305,65 +338,19 @@ function animation_goto_keyframe( idx )
 function read_collada( collada )
 {
 	three_inside.innerHTML = "loading collada file: "+input_collada_file+" <br>";
-	div_info.innerHTML += "create three.js scene <br>";
 	model = collada.scene;
 	animations = collada.animations;
-	physics_models = collada.dae.physics_models;
 
 	init_animation_data(); //load animation data BEFORE model, else some problems occurs
-	init_model_data();
 	init_three_scene();
-	set_camera_up_from_collada (collada);
-	
-	div_info.innerHTML += "finished; display scene <br>";
+	set_camera_up_from_collada(collada);
+
 	animate( lastTimestamp );
 };
 
 
-function init_model_data()
-{
-	list_of_shapes = [];
-	allModelNodes  = {};
-	$( '#check_shapes' ).attr('checked', true);
-	//info = document.getElementById( "div_collada_info" );
-	//parse_model_recursively(model, info, "");
-}
 
 
-function init_physics_model_data ()
-{
-
-	list_of_inertias = [];
-
-	for (phy_model in physics_models) {
-
-		var rigid_bodies = physics_models[phy_model].rigid_body;
-
-		for (var i = 0; i < rigid_bodies.length; i++ ) {
-
-			parent_node = allModelNodes[rigid_bodies[i].sid];
-
-			if (parent_node) {
-
-				var inertia_supporting_node = new THREE.Object3D();
-				inertia_supporting_node.applyMatrix( rigid_bodies[i].mass_frame );
-				inertia_supporting_node.scale.set( rigid_bodies[i].inertia.x, rigid_bodies[i].inertia.y, rigid_bodies[i].inertia.z );
-				parent_node.add(inertia_supporting_node);
-				
-
-				var inertia_node = create_inertia_mesh();
-				inertia_node.scale.set( inertia_scale_factor, inertia_scale_factor, inertia_scale_factor);
-				inertia_node.visible = false;
-				list_of_inertias.push(inertia_node);
-				inertia_supporting_node.add(inertia_node);
-
-			}
-
-		}
-
-	}
-
-}
 
 function init_animation_data()
 {
@@ -404,20 +391,19 @@ function init_animation_data()
 			animation.play( false, 0 );
 			
 			//save animation matrices in associative array
-			kk = animation.data.hierarchy[0].keys;
-			anim_data = [];
-			for (idx=0; idx<kk.length; idx++)
+			var kk = animation.data.hierarchy[0].keys;
+			var anim_data = [];
+			for (var idx=0; idx<kk.length; idx++)
 			{
-				el = kk[idx].targets[0].data.elements;
-				m = new THREE.Matrix4(el[0], el[4], el[8], el[12],
+				var el = kk[idx].targets[0].data.elements;
+				var m = new THREE.Matrix4(el[0], el[4], el[8], el[12],
 									  el[1], el[5], el[9], el[13],
 									  el[2], el[6], el[10], el[14],
 									  el[3], el[7], el[11], el[15]);
 				anim_data.push(m);
 			}
 			animationMovableNode[i] = animation.root;
-			animationNodeData[i] = anim_data;
-
+			animationNodeData[i]    = anim_data;
 		}
 
 		//GET TIMELINE:
@@ -455,7 +441,7 @@ function init_three_scene() {
 	scene.add( grid );
 	$( '#check_grid' ).attr('checked', true);
 
-	light = create_light();
+	var light = create_light();
 	scene.add( light );
 
 	// Renderer
@@ -558,7 +544,7 @@ function update_transform_from_msg (frame_transforms)
 
 		node = allModelNodes[frame];
 		node.quaternion.setFromRotationMatrix(m);
-		node.position = m.getPosition();
+		node.position.getPositionFromMatrix( m );
 		node.updateMatrix();
 	}
 	
@@ -569,6 +555,7 @@ function update_simulation_time(new_time)
 	animationTimeInfo.innerHTML = new_time.toPrecision(6) + "("+currentIndex+")";
 	currentIndex +=1;
 }
+
 
 
 

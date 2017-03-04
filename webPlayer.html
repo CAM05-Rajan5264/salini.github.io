@@ -26,12 +26,13 @@
                     Here is a prototype to display collada files with only javascript libraries. <br>
                     In the future, this player may become the arboris viewer: it should ease visualization (no compilation, cross-platform, etc.).
                     <ul>
+                        <li>The animation was generated with Arboris-python simulator to get an  <a href="webPlayer/anim.dae" target="_blank">animated collada file</a></li>
                         <li>The 3D graphic library is <a href="http://threejs.org/" target="_blank">three.js</a></li>
                         <li>The user interface is developed with <a href="http://jqueryui.com/" target="_blank">jQuery UI</a></li>
                     </ul>
                     
-                    <div style="margin:auto; text-align:center;">
-                        <iframe id="webdaenim_iframe" src="webPlayer/pydaenim.html"></iframe>
+                    <div style="margin:auto; text-align:center; max-width:1024px">
+                        <iframe style="width:100%;" id="webdaenim_iframe" src="webPlayer/pydaenim.html"></iframe>
                     </div> 
                     
                 </div>
@@ -51,6 +52,16 @@
         document.getElementById("headerContent").innerHTML     = Template.getHeader('SandBox');
         document.getElementById("navigationContent").innerHTML = Template.getNavigation();
         document.getElementById("footerContent").innerHTML     = Template.getFooter();
+        
+        window.addEventListener( 'resize', onWindowResize, false );
+
+        function onWindowResize(){
+            var webdaenim_iframe = document.getElementById( "webdaenim_iframe" );
+            webdaenim_iframe.setAttribute("style","display:block;width:100%;height:100%;");
+            console.log(webdaenim_iframe.clientWidth);
+            webdaenim_iframe.style.height=""+webdaenim_iframe.clientWidth*0.75 + "px";
+        }
+        onWindowResize();  // to do it once
     </script>
     
 </html>

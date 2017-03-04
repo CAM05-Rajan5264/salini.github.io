@@ -2,7 +2,7 @@
  * @author Tim Knip / http://www.floorplanner.com/ / tim at floorplanner.com
  */
 
-// This file has been modified by Joseph Salini for wsdaenim package.
+// This file has been modified by Joseph Salini for pydeanim package.
 // It does NOT modify the original functions defiend by Tim Knip, but it
 // adds some extra information in the return collada element loaded with this
 // ColladaLoader.
@@ -11,7 +11,7 @@
 // All addition is preceded by a header of the form:
 //
 //      //----------------------------------------//
-//      // modified by Joseph Salini for wsdaenim //
+//      // modified by Joseph Salini for pydaenim //
 //
 //      added code here
 //
@@ -44,6 +44,12 @@ THREE.ColladaLoader = function () {
 	var morphs;
 	var skins;
 
+    //----------------------------------------//
+    // modified by Joseph Salini for pydeanim //
+    var physics_models;
+    // end of modification                    //
+    //----------------------------------------//
+        
 	var flip_uv = true;
 	var preferredShading = THREE.SmoothShading;
 
@@ -160,7 +166,7 @@ THREE.ColladaLoader = function () {
 		visualScenes = parseLib( ".//dae:library_visual_scenes/dae:visual_scene", VisualScene, "visual_scene" );
 
 		//----------------------------------------//
-		// modified by Joseph Salini for wsdaenim //
+		// modified by Joseph Salini for pydeanim //
 		physics_models = parseLib( ".//dae:library_physics_models/dae:physics_model", PhysicsModel, "physics_model" );
 		// end of modification                    //
 		//----------------------------------------//
@@ -185,7 +191,7 @@ THREE.ColladaLoader = function () {
 		var result = {
 
 			//----------------------------------------//
-			// modified by Joseph Salini for wsdaenim //
+			// modified by Joseph Salini for pydeanim //
 			colladaUp: colladaUp,
 			// end of modification                    //
 			//----------------------------------------//
@@ -205,7 +211,7 @@ THREE.ColladaLoader = function () {
 				animations: animations,
 				visualScenes: visualScenes,
 				//----------------------------------------//
-				// modified by Joseph Salini for wsdaenim //
+				// modified by Joseph Salini for pydeanim //
 				physics_models: physics_models,
 				// end of modification                    //
 				//----------------------------------------//
@@ -4194,7 +4200,7 @@ THREE.ColladaLoader = function () {
 	};
 
 	//------------------------------------------------------------------------//
-	// modified by Joseph Salini for wsdaenim                                 //
+	// modified by Joseph Salini for pydeanim                                 //
 
 	// The following functions have been inspired by the definitions of Node,
 	// Geometry and Mesh.

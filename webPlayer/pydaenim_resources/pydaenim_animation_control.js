@@ -74,7 +74,7 @@ $(function() {
 	})
 		.click(function () {
 			$( "#stop" ).click();
-			webDaenimSocket.send( JSON.stringify(['start_recording']) );
+			//webDaenimSocket.send( JSON.stringify(['start_recording']) );
 			isRecording = true;
 			$( "#animation_control_information" ).html("record in folder 'wsdaenim_record'");
 			$( "#animation_control_information" ).show("highlight", {}, 750);
@@ -86,21 +86,10 @@ $(function() {
 		icons: { primary: "ui-icon-image" }
 	})
 		.click( function(){
-			image 	= new Image(); 
+			var image 	= new Image(); 
 			image.src = renderer.domElement.toDataURL("image/png;base64");
 			
-			if (webDaenimSocket != null)
-			{
-				webDaenimSocket.send( JSON.stringify(['save_img', image.src]) );
-				
-				$( "#animation_control_information" ).html("save image: 'snaphot.png'");
-				$( "#animation_control_information" ).show("highlight", {}, 750);
-				$( "#animation_control_information" ).slideUp(1000);
-			}
-			else
-			{
-				window.open(image.src);
-			}
+            window.open(image.src);
 		});
 	
 	//when starting, disable all buttons except snapshot
