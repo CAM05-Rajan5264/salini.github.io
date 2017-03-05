@@ -70,7 +70,7 @@ class Template {
         str += this.getNavElement('webPlayer.html', 'webPlayer');
         str += this.getNavElement('XDE.html', 'XDE');
         str += this.getNavElement('Arboris.html', 'Arboris');
-        str += this.getNavElement('Tools.html', 'Tools for thesis');
+        str += this.getNavElement('Tools.html', 'Tools/Tricks');
         str += this.getNavNoElement();
         str += this.getNavNoElement();
         str += this.getNavElement('Contact.html', 'Contact');
