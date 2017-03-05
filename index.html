@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html>
 
-    <head> <!-- HEADER -->
+    <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/mainstyle.css" />
         <title>Joseph Salini Web page</title>
     </head>
 
-    <body> <!-- BODY -->
-        <header id="headerContent"></header>
-
-        <bodier>
-            <nav id="navigationContent"></nav>
-
-            <div id="backgroundContent" class="background_icub"></div>
-        </bodier>
-
-        <footer id="footerContent"></footer>
+    <body>
     </body>
-    
-    <!-- SCRIPTS -->
+
+
     <script src="Template.js" type="text/javascript"></script>
     <script>
-        document.getElementById("headerContent").innerHTML     = Template.getHeader('Joseph Salini - Robotic Engineer');
-        document.getElementById("navigationContent").innerHTML = Template.getNavigation();
-        document.getElementById("backgroundContent").innerHTML = Template.getBackground();
-        document.getElementById("footerContent").innerHTML     = Template.getFooter();
+        var template = new Template('Joseph Salini - Robotic Engineer');
+        template.apply(document.body);
     </script>
 
 </html>

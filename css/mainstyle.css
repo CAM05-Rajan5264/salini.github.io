@@ -18,22 +18,22 @@ li { margin-bottom:1em; }
 /* for frames */
 frame
 {
-	border: 1px red solid;
+    border: 1px red solid;
 }
 
 
 pre
 {
-	margin: 0px;
-	padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 
 .code_block
 {
-	border: 1px #000000 solid;
-	background: #dddddd;
-	margin-top: 10px;
+    border: 1px #000000 solid;
+    background: #dddddd;
+    margin-top: 10px;
 }
 
 
@@ -59,8 +59,6 @@ header
     background: -moz-linear-gradient(center top, black, rgb(185,199,207));
     background: -webkit-gradient(linear, center top, center bottom, from(black), to(rgb(185,199,207)));
     background: -o-linear-gradient(top, black, rgb(185,199,207));
-    
-
 
     color: rgb(217,221,231);
     /*z-index: 20;*/
@@ -83,26 +81,18 @@ h1
 
 #PROF_space
 {
-	position: fixed;
-	top: 10px;
-	right: 10px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
 }
+
 
 #prof_page
 {
-	display: inline-block;
-	vertical-align: middle;
-	font-size: large;
-}
-
-#ISIR_logo
-{
-	display: inline-block;
+    display: inline-block;
     vertical-align: middle;
+    font-size: large;
 }
-
-
-
 
 
 
@@ -139,27 +129,26 @@ bodier
 
 h2
 {
-	margin: 0px;
+    margin: 0px;
     font-size: 1.5em;
 }
 
 h2 a
 {
-	color: black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 
 nav, navigation
 {
-	position: fixed;
-	top: 15%;
-	bottom: 25%;
-	left:0px;
-	
-	width: 20%;
-	min-width: 220px;
-	
+    position: fixed;
+    top: 15%;
+    bottom: 25%;
+    left:0px;
+
+    width: 20%;
+    min-width: 220px;
     text-align: center;
     
     z-index: 5;
@@ -167,30 +156,28 @@ nav, navigation
 
 nav table
 {
-	width: 100%;
-	min-width: 220px;	
-	height: 100%;
-	
-	border-collapse: collapse;
+    width: 100%;
+    min-width: 220px;
+    height: 100%;
 
-	margin:0px;
-	padding: 0px;
+    border-collapse: collapse;
+
+    margin:0px;
+    padding: 0px;
 }
 
 
 .dummy_nav_space
 {
-	width:20%;
-	min-width:220px;
-	
-	z-index: 4;
+    width:20%;
+    min-width:220px;
+
+    z-index: 4;
 }
-
-
 
 .section
 {
-	width: 80%;
+    width: 80%;
     border-left: 2px solid rgb(185,199,207);
     border-radius: 0px 0px 0px 50px;
     padding: 20px;
@@ -200,49 +187,39 @@ nav table
 
 .section_block
 {
-	border: 2px solid rgb(185,199,207);
-	border-bottom: 0px;
+    border: 2px solid rgb(185,199,207);
+    border-bottom: 0px;
     border-radius: 20px 20px 20px 20px;
     padding: 15px;
-	padding-top: 20px;
-	padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin-bottom: 30px;
 }
 
 .section_block h3
 {
-	padding-left: 10px;
-	margin-top: -10px;
-	padding-bottom: 10px;
-	border-bottom: 2px solid rgb(185,199,207);
-	
+    padding-left: 10px;
+    margin-top: -10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(185,199,207);
 }
 
-.work_in_progress
-{
-	font-size: 2em;
-	color: black;
-	padding: 2px;
-}
 
 .background_icub
 {
-	position: fixed;
-	top: 60px;
-	bottom:  25px;
-	right: 0px;
-	left: 0px;
-	text-align: right;
-	
-	z-index: 2;
+    position: fixed;
+    top: 60px;
+    bottom:  25px;
+    right: 0px;
+    text-align: right;
+    z-index: 2;
 }
 
 
 #webdaenim_iframe
 {
-	width:100%;
-	/* padding-top: 50%; */
-	sandbox: allow-forms allow-same-origin allow-scripts allow-top-navigation;
+    width:100%;
+    sandbox: allow-forms allow-same-origin allow-scripts allow-top-navigation;
 }
 
 

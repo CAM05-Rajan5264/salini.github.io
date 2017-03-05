@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 
-    <head> <!-- HEADER -->
+    <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/mainstyle.css" />
         <title>Joseph Salini Web page: Sandbox</title>
     </head>
 
-
-    <body> <!-- BODY -->
-        <header id="headerContent"></header>
-
-        <bodier>
-            <nav id="navigationContent"></nav>
+    <body>
+        <div id="content">
 
             <table style="width:100%; height:100%;">
                 <tr>
@@ -31,6 +27,7 @@
                         <li>The user interface is developed with <a href="http://jqueryui.com/" target="_blank">jQuery UI</a></li>
                     </ul>
                     
+                    It is possible to move the scene: (left-click: <strong>rotate</strong>, right-click: <strong>translate</strong>, middle-click: <strong>zoom</strong> )
                     <div style="margin:auto; text-align:center; max-width:1024px">
                         <iframe style="width:100%;" id="webdaenim_iframe" src="webPlayer/pydaenim.html"></iframe>
                     </div> 
@@ -41,27 +38,24 @@
                     </td>
                 </tr>
             </table>
-        </bodier>
 
-        <footer id="footerContent"></footer>
+        </div>
     </body>
 
-    <!-- SCRIPTS -->
     <script src="Template.js" type="text/javascript"></script>
     <script>
-        document.getElementById("headerContent").innerHTML     = Template.getHeader('SandBox');
-        document.getElementById("navigationContent").innerHTML = Template.getNavigation();
-        document.getElementById("footerContent").innerHTML     = Template.getFooter();
+        var template = new Template('SandBox');
+        template.setContentElement(document.getElementById("content"));
+        template.apply(document.body);
         
         window.addEventListener( 'resize', onWindowResize, false );
-
+        onWindowResize();  // to do it once
+        
         function onWindowResize(){
             var webdaenim_iframe = document.getElementById( "webdaenim_iframe" );
             webdaenim_iframe.setAttribute("style","display:block;width:100%;height:100%;");
-            console.log(webdaenim_iframe.clientWidth);
             webdaenim_iframe.style.height=""+webdaenim_iframe.clientWidth*0.75 + "px";
         }
-        onWindowResize();  // to do it once
     </script>
-    
+
 </html>
