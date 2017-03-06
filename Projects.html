@@ -13,13 +13,65 @@
                 <td  class="section">
                     <div class="section_block">
                     <h3>DexROVHaptics</h3>
+                    In this project, the goal is to implement a haptic engine (per se, <a href="http://www.h3dapi.org/">H3D HAPI</a>) in a simulation environment.
+                    <br>
+                    The videos below show that is it possible:
+                    <ul>
+                    <li>to contact simple primitives with diferent coefficients of friction</li>
+                    <li>to contact moving objects</li>
+                    <li>to get a haptic feedback on complex meshes (here using a falcon device)</li>
+                    <li>to interect with many haptic points simultaneously (here using a leap motion device)</li>
+                    </ul>
+                    <br>
                     <a href="documentations/DexROVHaptics/index.html">DexROVHaptics documentation</a>
+                    
+                    <div style="height:15px"></div>
+                    
+                    <div  style="text-align:center;">
+                    
+                    <video width="45%" controls >   
+                    <source src="mov/projects/dexrov/00_static.webm" type="video/webm" />
+                    <a href="mov/projects/dexrov/00_static.webm">dexrov/00_static</a>
+                    </video>
+                    
+                    <video width="45%" controls >   
+                    <source src="mov/projects/dexrov/01_moving.webm" type="video/webm" />
+                    <a href="mov/projects/dexrov/01_moving.webm">dexrov/01_moving</a>
+                    </video>
+                    
+                    <video width="45%" controls >   
+                    <source src="mov/projects/dexrov/02_complex_mesh.webm" type="video/webm" />
+                    <a href="mov/projects/dexrov/02_complex_mesh.webm">dexrov/02_complex_mesh</a>
+                    </video>
+                    
+                    <video width="45%" controls >   
+                    <source src="mov/projects/dexrov/03_multipoints.webm" type="video/webm" />
+                    <a href="mov/projects/dexrov/03_multipoints.webm">dexrov/03_multipoints</a>
+                    </video>
+                    
+                    </div>
                     </div>
 
                     <div class="section_block">
                     
                     <h3>MIRAD</h3>
+                    In this project, the goal is to provide an application that gives a real-time visual feedback of an avatar (tracked with a kinect-like device) where we add a virtual lower-limb exoskeleton. 
+                    <br>
+                    The videos show the different parts of this implementation:
+                    <ul>
+                    <li>First, based on a point cloud coming from the kinect, we extract a virtual manikin of the user (here, the device extracts nodes, and they are connected to each other with virtual links)</li>
+                    <li>This manikin is used as a baseline to move a physical model (using OpenSim) represented by a skeleton</li>
+                    <li>On this physical model, we add the lower-limb exoskeleton</li>
+                    <li>We can perform som rough analysis, e.g. auto-collision</li>
+                    <li>We can also display physical information, as the Center of Mass position of physical model, and its projection on the ground</li>
+                    </ul>
+                    <br>
+                    <a href="documentations/Mirad/index.html">Mirad documentation</a>
+                    
+                    <div style="height:15px"></div>
+                    
                     <div  style="text-align:center;">
+                    
                     <video width="45%" controls >   
                     <source src="mov/projects/mirad/00_trackerCapture.mpg.webm" type="video/webm" />
                     <a href="mov/projects/mirad/00_trackerCapture.mpg.webm">mirad/00_trackerCapture</a>
